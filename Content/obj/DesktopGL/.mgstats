@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/SplashScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/SplashScreen.xnb","TextureProcessor","Texture2DContent",3281,249941,0.102069
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/TitleScreen.xnb","TextureProcessor","Texture2DContent",3114,229461,0.0064691

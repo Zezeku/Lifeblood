@@ -8,10 +8,14 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private int scale_facctor = 3;
+    Texture2D _texture;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
+        _graphics.PreferredBackBufferWidth = 256*scale_facctor;
+        _graphics.PreferredBackBufferHeight = 244*scale_facctor;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
@@ -27,7 +31,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
+        _texture = Content.Load<Texture2D>("SplashScreen");
     }
 
     protected override void Update(GameTime gameTime)
@@ -43,8 +47,12 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
+        _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
 
-        // TODO: Add your drawing code here
+
+        _spriteBatch.Draw(_texture, new Rectangle(0,0,256*scale_facctor,244*scale_facctor), Color.White);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
