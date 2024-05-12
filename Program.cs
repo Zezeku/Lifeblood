@@ -1,3 +1,3 @@
 ﻿
-using var game = new DevProject.Game1();
+using var game = new Lifeblood.Game1();
 game.Run();

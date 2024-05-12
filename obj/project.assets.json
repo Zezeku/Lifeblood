@@ -107,9 +107,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/NerdCave/MonoGame Projects/Lifeblood/DevProject.csproj",
-      "projectName": "DevProject",
-      "projectPath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/DevProject.csproj",
+      "projectUniqueName": "/mnt/NerdCave/MonoGame Projects/Lifeblood/Lifeblood.csproj",
+      "projectName": "Lifeblood",
+      "projectPath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/Lifeblood.csproj",
       "packagesPath": "/home/zezeku/.nuget/packages/",
       "outputPath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/obj/",
       "projectStyle": "PackageReference",

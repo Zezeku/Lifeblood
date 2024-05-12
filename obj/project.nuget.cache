@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jEJq71aNGvoZ+mZZf5j4RRf4K4qjsBk0k9fQGoX5jkBCDzMThw3l8QvYbb6+veiOxKLqBRZLFXiYalk4iHie7w==",
+  "dgSpecHash": "Boo9/hn0TtkJEfg+VSBE2TJTNgtSt8sHAN50zxPdxgFbQ3NY0vj44MWDoDsXnac6gJvCH9o/HZg/AYattmQFpw==",
   "success": true,
-  "projectFilePath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/DevProject.csproj",
+  "projectFilePath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/Lifeblood.csproj",
   "expectedPackageFiles": [
     "/home/zezeku/.nuget/packages/monogame.content.builder.task/3.8.1.303/monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "/home/zezeku/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
