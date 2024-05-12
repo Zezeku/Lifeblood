@@ -4,10 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/alagard.spritefont</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSprite.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSpriteMove.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/Overworld.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/SplashScreen.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

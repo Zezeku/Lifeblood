@@ -25,3 +25,7 @@
 /mnt/NerdCave/MonoGame Projects/Lifeblood/obj/Debug/net6.0/Lifeblood.pdb
 /mnt/NerdCave/MonoGame Projects/Lifeblood/obj/Debug/net6.0/Lifeblood.genruntimeconfig.cache
 /mnt/NerdCave/MonoGame Projects/Lifeblood/obj/Debug/net6.0/ref/Lifeblood.dll
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/AvatarSprite.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/AvatarSpriteMove.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/Overworld.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/alagard.xnb
