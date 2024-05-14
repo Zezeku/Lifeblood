@@ -10,9 +10,10 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private int scale_facctor = 3;
+    private int scale_factor = 3;
     Texture2D _texture_splash;
     Texture2D _texture_title;
+    Texture2D _texture_pointer;
     Texture2D _texture_current;
     Color _color_fade;
     SpriteFont _font;
@@ -26,6 +27,11 @@ public class Game1 : Game
     double fadeOutTargetTime = 1;
     double fadeOutTimer = 0;
 
+    int pointerPosition;
+    int pointerOffset = 0;
+    Boolean isDownPressed = false;
+    Boolean isUpPressed = false;
+
     enum BasicState
     {
         Splash,
@@ -38,11 +44,12 @@ public class Game1 : Game
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = 256*scale_facctor;
-        _graphics.PreferredBackBufferHeight = 244*scale_facctor;
+        _graphics.PreferredBackBufferWidth = 256*scale_factor;
+        _graphics.PreferredBackBufferHeight = 244*scale_factor;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
         isTitleDraw = false;
+        pointerPosition = 244*scale_factor/2 - 10 ;
     }
 
     protected override void Initialize()
@@ -60,6 +67,7 @@ public class Game1 : Game
 
         _texture_splash = Content.Load<Texture2D>("SplashScreen");
         _texture_title = Content.Load<Texture2D>("TitleScreen");
+        _texture_pointer = Content.Load<Texture2D>("TitlePointer");
         _texture_current = _texture_splash;
         _font = Content.Load<SpriteFont>("alagard");
     }
@@ -71,6 +79,12 @@ public class Game1 : Game
 
         if(bs == BasicState.Splash)
         {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                fadeInTimer = fadeInTargetTime;
+                delayTimer = delayTarget;
+            }
+
             if(fadeInTimer < fadeInTargetTime)
             {
                 fadeInTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -107,8 +121,36 @@ public class Game1 : Game
                 _color_fade.B = (byte)(255 * (fadeInTimer / fadeInTargetTime));
             }
             else{
-                bs = BasicState.Game;
+                //bs = BasicState.Game;
                 isTitleDraw = true;
+
+                if(!isDownPressed && Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    isDownPressed = true;
+                    if(pointerOffset != 100)
+                    {
+                        pointerOffset += 100;
+                    }
+                }
+
+                if(Keyboard.GetState().IsKeyUp(Keys.Down))
+                {
+                    isDownPressed = false;
+                }
+
+                if(!isUpPressed && Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    isUpPressed = true;
+                    if(pointerOffset != 0)
+                    {
+                        pointerOffset -= 100;
+                    }
+                }
+
+                if(Keyboard.GetState().IsKeyUp(Keys.Up))
+                {
+                    isUpPressed = false;
+                }
             }
         }
         else{
@@ -129,10 +171,12 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
 
-        _spriteBatch.Draw(_texture_current, new Rectangle(0,0,256*scale_facctor,244*scale_facctor), _color_fade);
+        _spriteBatch.Draw(_texture_current, new Rectangle(0,0,256*scale_factor,244*scale_factor), _color_fade);
         if(isTitleDraw)
         {
-            _spriteBatch.DrawString(_font, "New Game", new Vector2(256*scale_facctor/3, 244*scale_facctor/2), Color.White, 0, new Vector2(0,0), scale_titleFont, 0, 0);
+            _spriteBatch.Draw(_texture_pointer, new Rectangle(256*scale_factor/3-100, pointerPosition + pointerOffset, 8*10, 8*10), Color.White);
+            _spriteBatch.DrawString(_font, "New Game", new Vector2(256*scale_factor/3, 244*scale_factor/2), Color.White, 0, new Vector2(0,0), scale_titleFont, 0, 0);
+            _spriteBatch.DrawString(_font, "Continue", new Vector2(256*scale_factor/3, 244*scale_factor/2 + 100), Color.Gray, 0, new Vector2(0,0), scale_titleFont, 0, 0);
         }
         _spriteBatch.End();
 

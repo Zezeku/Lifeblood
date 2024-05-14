@@ -29,3 +29,4 @@
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/AvatarSpriteMove.xnb
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/Overworld.xnb
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/alagard.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/TitlePointer.xnb

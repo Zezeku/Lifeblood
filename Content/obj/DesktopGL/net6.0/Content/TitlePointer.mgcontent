@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png</SourceFile>
-  <SourceTime>2024-05-10T18:34:10.7720119-04:00</SourceTime>
-  <DestFile>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/TitleScreen.xnb</DestFile>
-  <DestTime>2024-05-12T18:24:15.2558705-04:00</DestTime>
+  <SourceFile>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitlePointer.png</SourceFile>
+  <SourceTime>2024-05-12T18:23:58.7679892-04:00</SourceTime>
+  <DestFile>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/Content/TitlePointer.xnb</DestFile>
+  <DestTime>2024-05-12T18:26:24.5189332-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

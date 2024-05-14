@@ -1,7 +1,8 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/alagard.spritefont","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/alagard.xnb","FontDescriptionProcessor","SpriteFontContent",2010,21535,0.1463469
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSprite.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/AvatarSprite.xnb","TextureProcessor","Texture2DContent",99,1109,0.0840914
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSpriteMove.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/AvatarSpriteMove.xnb","TextureProcessor","Texture2DContent",123,1109,0.0014384
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/Overworld.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/Overworld.xnb","TextureProcessor","Texture2DContent",2118,999509,0.021127
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/SplashScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/SplashScreen.xnb","TextureProcessor","Texture2DContent",3281,249941,0.0042423
-"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/TitleScreen.xnb","TextureProcessor","Texture2DContent",3114,229461,0.0042217
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/alagard.spritefont","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/alagard.xnb","FontDescriptionProcessor","SpriteFontContent",2010,21535,0.1650655
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSprite.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/AvatarSprite.xnb","TextureProcessor","Texture2DContent",99,1109,0.0053903
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSpriteMove.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/AvatarSpriteMove.xnb","TextureProcessor","Texture2DContent",123,1109,0.0010282
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/Overworld.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/Overworld.xnb","TextureProcessor","Texture2DContent",2118,999509,0.0214495
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/SplashScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/SplashScreen.xnb","TextureProcessor","Texture2DContent",3281,249941,0.0043629
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitlePointer.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/TitlePointer.xnb","TextureProcessor","Texture2DContent",149,341,0.0887978
+"/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png","/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/bin/DesktopGL/TitleScreen.xnb","TextureProcessor","Texture2DContent",3114,229461,0.0043029
