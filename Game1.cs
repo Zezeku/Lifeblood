@@ -49,6 +49,7 @@ public class Game1 : Game
         {
             scene.Update(gameTime);
         }
+        // can put an if else here where we reassign a new scene using scene manager
         else 
         {
             Exit();
