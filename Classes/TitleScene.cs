@@ -12,8 +12,6 @@ namespace Lifeblood;
 public class TitleScene: IScene
 {
     Boolean isPlaying;
-
-    Controller controller;
     
     Texture2D _texture_splash;
     Texture2D _texture_title;
@@ -42,11 +40,6 @@ public class TitleScene: IScene
     Boolean isUpPressed;
     Boolean isEnterPressed;
 
-    public TitleScene(Controller controller)
-    {
-        this.controller = controller;
-    }
-
     enum TitleStates
     {
         FadeIn1,
@@ -66,8 +59,6 @@ public class TitleScene: IScene
     void IScene.LoadContent(ContentManager content)
     {
         isPlaying = true;
-
-        controller.isActive = false; //default for fadeIn
 
         _texture_splash = content.Load<Texture2D>("SplashScreen");
         _texture_title = content.Load<Texture2D>("TitleScreen");
@@ -241,6 +232,7 @@ public class TitleScene: IScene
 
     void IScene.Draw(GameTime gameTime, SpriteBatch spriteBatch, int scale_factor)
     {
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
         for(int i = 0; i < draw_list_textures.Count; i++) 
         {
             spriteBatch.Draw(
@@ -282,5 +274,10 @@ public class TitleScene: IScene
         }
 
         spriteBatch.End();
+    }
+
+    internal IScene Load()
+    {
+        throw new NotImplementedException();
     }
 }
