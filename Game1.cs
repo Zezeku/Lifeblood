@@ -35,7 +35,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         controller = new Controller();
-        
+
         scene = new TitleScene(controller);
         scene.LoadContent(Content);
     }
@@ -45,7 +45,14 @@ public class Game1 : Game
         if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        scene.Update(gameTime);
+        if(scene.IsPlaying())
+        {
+            scene.Update(gameTime);
+        }
+        else 
+        {
+            Exit();
+        }
 
         base.Update(gameTime);
     }

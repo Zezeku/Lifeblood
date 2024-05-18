@@ -10,6 +10,8 @@ namespace Lifeblood;
 
 public interface IScene
 {
+    bool IsPlaying();
+
     void LoadContent(ContentManager content);
 
     void Update(GameTime gameTime);       
