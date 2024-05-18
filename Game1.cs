@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,31 +16,35 @@ public class Game1 : Game
     Texture2D _texture_title;
     Texture2D _texture_pointer;
     Texture2D _texture_current;
+    Texture2D _texture_next;
+
     Color _color_fade;
     SpriteFont _font;
     int scale_titleFont = 4;
     Boolean isTitleDraw;
 
-    double fadeInTargetTime = 1;
-    double fadeInTimer = 0;
     double delayTimer = 0;
     double delayTarget = 1.5;
-    double fadeOutTargetTime = 1;
-    double fadeOutTimer = 0;
+
 
     int pointerPosition;
     int pointerOffset = 0;
     Boolean isDownPressed = false;
     Boolean isUpPressed = false;
+    Boolean isEnterPressed = false;
+    Boolean isGameStart = false;
 
     enum BasicState
     {
         Splash,
         Title,
         Game,
+        ScreenFadeIn,
+        ScreenFadeOut,
         Exit
     }
     BasicState bs;
+    Stack<BasicState> state_stack = new Stack<BasicState>();
 
     public Game1()
     {
@@ -55,82 +60,54 @@ public class Game1 : Game
     protected override void Initialize()
     {
         GameTime gt = new GameTime();
-        bs = BasicState.Splash;
+        state_stack.Push(BasicState.Splash);
+        state_stack.Push(BasicState.ScreenFadeIn);
+        bs = state_stack.Pop();
         _color_fade = new Color(0, 0, 0, 255);
-
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         _texture_splash = Content.Load<Texture2D>("SplashScreen");
         _texture_title = Content.Load<Texture2D>("TitleScreen");
         _texture_pointer = Content.Load<Texture2D>("TitlePointer");
         _texture_current = _texture_splash;
         _font = Content.Load<SpriteFont>("alagard");
+
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        if(bs == BasicState.Splash)
+        switch (bs)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                fadeInTimer = fadeInTargetTime;
-                delayTimer = delayTarget;
-            }
+            case BasicState.Splash:
+                if(delayTimer < delayTarget)
+                {
+                    delayTimer += gameTime.ElapsedGameTime.TotalSeconds;    
+                }
+                else
+                {
+                    _texture_next = _texture_title;
+                    state_stack.Push(BasicState.Title);
+                    state_stack.Push(BasicState.ScreenFadeIn);
+                    state_stack.Push(BasicState.ScreenFadeOut);
+                    bs = state_stack.Pop();
+                }
 
-            if(fadeInTimer < fadeInTargetTime)
-            {
-                fadeInTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                _color_fade.R = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-                _color_fade.G = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-                _color_fade.B = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-            }
-            else if(delayTimer < delayTarget)
-            {
-                delayTimer += gameTime.ElapsedGameTime.TotalSeconds;    
-            }
-            else if(fadeOutTimer < fadeOutTargetTime)
-            {
-                fadeOutTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                _color_fade.R = (byte)(255 - 255 * (fadeOutTimer / fadeOutTargetTime));
-                _color_fade.G = (byte)(255 - 255 * (fadeOutTimer / fadeOutTargetTime));
-                _color_fade.B = (byte)(255 - 255 * (fadeOutTimer / fadeOutTargetTime));
-            }
-            else
-            {
-                fadeInTimer = 0;
-                fadeOutTimer = 0;
-                 _texture_current = _texture_title;
-                bs = BasicState.Title;
-            }
-        }
-        else if(bs == BasicState.Title)
-        {
-            if(fadeInTimer < fadeInTargetTime)
-            {
-                fadeInTimer += gameTime.ElapsedGameTime.TotalSeconds;
-                _color_fade.R = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-                _color_fade.G = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-                _color_fade.B = (byte)(255 * (fadeInTimer / fadeInTargetTime));
-            }
-            else{
-                //bs = BasicState.Game;
+                break;
+            
+            case BasicState.Title:
                 isTitleDraw = true;
 
-                if(!isDownPressed && Keyboard.GetState().IsKeyDown(Keys.Down))
+                if(!isDownPressed && Keyboard.GetState().IsKeyDown(Keys.Down) && pointerOffset != 100)
                 {
                     isDownPressed = true;
-                    if(pointerOffset != 100)
-                    {
-                        pointerOffset += 100;
-                    }
+                    pointerOffset += 100;
                 }
 
                 if(Keyboard.GetState().IsKeyUp(Keys.Down))
@@ -138,48 +115,87 @@ public class Game1 : Game
                     isDownPressed = false;
                 }
 
-                if(!isUpPressed && Keyboard.GetState().IsKeyDown(Keys.Up))
+                if(!isUpPressed && Keyboard.GetState().IsKeyDown(Keys.Up) && pointerOffset != 0)
                 {
                     isUpPressed = true;
-                    if(pointerOffset != 0)
-                    {
-                        pointerOffset -= 100;
-                    }
+                    pointerOffset -= 100;
                 }
 
                 if(Keyboard.GetState().IsKeyUp(Keys.Up))
                 {
                     isUpPressed = false;
                 }
-            }
-        }
-        else{
-            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                isTitleDraw = false;
-                fadeOutTimer = 0;
-                _texture_current = _texture_splash;
-                bs = BasicState.Splash;
-            }
+
+                if(Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    isEnterPressed = true;
+                    isTitleDraw = false;
+                    _texture_next = _texture_splash;
+                    state_stack.Push(BasicState.Game);
+                    state_stack.Push(BasicState.ScreenFadeIn);
+                    state_stack.Push(BasicState.ScreenFadeOut);
+                    bs = state_stack.Pop();
+                }
+
+                break;
+            
+            case BasicState.Game:
+
+                break;
+            
+            case BasicState.ScreenFadeIn:
+                if(_color_fade.R < 254)
+                {
+                    _color_fade.R += 2;
+                    _color_fade.G += 2;
+                    _color_fade.B += 2;
+                }
+                else 
+                {
+                    bs = state_stack.Pop();
+                }
+                break;
+            
+            case BasicState.ScreenFadeOut:
+                if(_color_fade.R > 1)
+                {
+                    _color_fade.R -= 2;
+                    _color_fade.G -= 2;
+                    _color_fade.B -= 2;
+                }
+                else
+                {
+                    _texture_current = _texture_next;
+                    bs = state_stack.Pop();
+                }
+                break;
+            
+            case BasicState.Exit:
+
+                break;
         }
 
         base.Update(gameTime);
     }
+
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
 
-        _spriteBatch.Draw(_texture_current, new Rectangle(0,0,256*scale_factor,244*scale_factor), _color_fade);
+
+        _spriteBatch.Draw(_texture_current, new Rectangle(0,0,256*scale_factor,244*scale_factor), _color_fade); 
+
         if(isTitleDraw)
         {
-            _spriteBatch.Draw(_texture_pointer, new Rectangle(256*scale_factor/3-100, pointerPosition + pointerOffset, 8*10, 8*10), Color.White);
-            _spriteBatch.DrawString(_font, "New Game", new Vector2(256*scale_factor/3, 244*scale_factor/2), Color.White, 0, new Vector2(0,0), scale_titleFont, 0, 0);
-            _spriteBatch.DrawString(_font, "Continue", new Vector2(256*scale_factor/3, 244*scale_factor/2 + 100), Color.Gray, 0, new Vector2(0,0), scale_titleFont, 0, 0);
+            _spriteBatch.Draw(_texture_pointer, new Rectangle(256*scale_factor/3-100, pointerPosition + pointerOffset, 8*10, 8*10), _color_fade);
+            _spriteBatch.DrawString(_font, "New Game", new Vector2(256*scale_factor/3, 244*scale_factor/2), _color_fade, 0, new Vector2(0,0), scale_titleFont, 0, 0);
+            _spriteBatch.DrawString(_font, "Continue", new Vector2(256*scale_factor/3, 244*scale_factor/2 + 100), _color_fade, 0, new Vector2(0,0), scale_titleFont, 0, 0);
         }
         _spriteBatch.End();
 
         base.Draw(gameTime);
     }
+
 }
