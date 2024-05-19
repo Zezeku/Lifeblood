@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "owY9KGT90hdewH2HCIM9RvBZq/zX+Y6pi3yAQ14q9+4qsbP+selzcPwCpVdR3ZVWWqH0kdHUvsKOoPs5pyLd5g==",
+  "dgSpecHash": "8vo4lABFRPgeHtQtXRmI/XQZ7dVEklwrm1S3bs/urpYyu3OZ5lbQOWUk/I3s3TSNXLUYW8oLvho0DttjoYensw==",
   "success": true,
   "projectFilePath": "/mnt/NerdCave/MonoGame Projects/Lifeblood/Lifeblood.csproj",
   "expectedPackageFiles": [
     "/home/zezeku/.nuget/packages/monogame.content.builder.task/3.8.1.303/monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "/home/zezeku/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
     "/home/zezeku/.nuget/packages/microsoft.netcore.app.ref/6.0.30/microsoft.netcore.app.ref.6.0.30.nupkg.sha512",
+    "/home/zezeku/.nuget/packages/microsoft.netcore.app.runtime.win-x64/6.0.30/microsoft.netcore.app.runtime.win-x64.6.0.30.nupkg.sha512",
     "/home/zezeku/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.30/microsoft.aspnetcore.app.ref.6.0.30.nupkg.sha512",
-    "/home/zezeku/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.30/microsoft.netcore.app.host.linux-x64.6.0.30.nupkg.sha512"
+    "/home/zezeku/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/6.0.30/microsoft.aspnetcore.app.runtime.win-x64.6.0.30.nupkg.sha512",
+    "/home/zezeku/.nuget/packages/microsoft.netcore.app.host.win-x64/6.0.30/microsoft.netcore.app.host.win-x64.6.0.30.nupkg.sha512"
   ],
   "logs": []
 }

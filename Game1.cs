@@ -16,6 +16,7 @@ public class Game1 : Game
     SpriteFont _font;
 
     Texture2D texture_sq;
+    bool isZone;
 
     IScene scene;
     Stack<IScene> stack_scene;
@@ -43,10 +44,11 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _font = Content.Load<SpriteFont>("alagard");
         texture_sq = Content.Load<Texture2D>("AvatarSprite");
+        isZone = false;
 
         stack_scene = new Stack<IScene>();
         stack_scene.Push(new Zone_Start());
-        //stack_scene.Push(new TitleScene());
+        stack_scene.Push(new TitleScene());
         scene = stack_scene.Pop();
         scene.LoadContent(Content);
     }
@@ -69,6 +71,7 @@ public class Game1 : Game
             {
                 scene = stack_scene.Pop();
                 scene.LoadContent(Content);
+                isZone = true;
             }
             else 
             {
@@ -85,18 +88,21 @@ public class Game1 : Game
         
         scene.Draw(gameTime, _spriteBatch, scale_factor);
 
-        // TESTING MOVEMENT ALIGNMENT
-        // _spriteBatch.Begin();
-        // for(int i = 0; i < _graphics.PreferredBackBufferHeight/(8*scale_factor)+1; i++)
-        // {
-        //     for(int j = 0; j < _graphics.PreferredBackBufferWidth/(8*scale_factor)+1; j++)
-        //     {
-        //         int checker = ((i%2)+(j%2))%2; 
-        //         _spriteBatch.Draw(texture_sq, new Rectangle((j*8-4)*scale_factor, (i*8-4)*scale_factor, 8*scale_factor, 8*scale_factor), new Color(255*checker, 255*checker, 255*checker, 1*(1-checker)));
-        //     }
-        // }
-        // _spriteBatch.End();
-
+        //TESTING MOVEMENT ALIGNMENT
+        if(isZone)
+        {
+            _spriteBatch.Begin();
+            for(int i = 0; i < _graphics.PreferredBackBufferHeight/(8*scale_factor)+1; i++)
+            {
+                for(int j = 0; j < _graphics.PreferredBackBufferWidth/(8*scale_factor)+1; j++)
+                {
+                    int checker = ((i%2)+(j%2))%2; 
+                    _spriteBatch.Draw(texture_sq, new Rectangle((j*8-4)*scale_factor, (i*8-4)*scale_factor, 8*scale_factor, 8*scale_factor), new Color(255*checker, 255*checker, 255*checker, 1*(1-checker)));
+                }
+            }
+            _spriteBatch.End();
+        }
+        
         _spriteBatch.Begin();
         _spriteBatch.DrawString(_font, "FPS: " + fps.ToString("0.00"), new Vector2(20,20), Color.White);
         _spriteBatch.End();
