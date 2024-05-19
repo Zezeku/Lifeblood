@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-//using System.Numerics;
+
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,16 +14,24 @@ public class Zone_Start: IScene
 {
     Boolean isPlaying;
 
+    Texture2D texture_player_idle;
+    Texture2D texture_player_moving;
     Texture2D texture_player;
     Vector2 position_player;
-    Vector2 velocity;
-    int speed;
 
+    int pixels_per_step;
+    float sec_per_step;
+    int pixels_per_sec;
 
-    bool isUpPresesd;
-    bool isDownPresesd;
-    bool isLeftPressed;
-    bool isRightPressed;
+    enum PLAYER_STATE
+    {
+        IDLE,
+        MOVING_UP,
+        MOVING_DOWN,
+        MOVING_LEFT,
+        MOVING_RIGHT
+    }
+    PLAYER_STATE ps;
 
     bool IScene.IsPlaying()
     {
@@ -32,61 +41,118 @@ public class Zone_Start: IScene
     void IScene.LoadContent(ContentManager content)
     {
         isPlaying = true;
-        texture_player = content.Load<Texture2D>("AvatarSprite");
-        position_player = new Vector2(256/2,244/2);
-        velocity = new Vector2(0,0);
-        speed = texture_player.Width/8*3;
+        texture_player_idle = content.Load<Texture2D>("AvatarSprite");
+        texture_player_moving = content.Load<Texture2D>("AvatarSpriteMove");
+        texture_player = texture_player_idle;
 
-        isUpPresesd = false;
-        isDownPresesd = false;
-        isLeftPressed = false;
-        isRightPressed = false;
+        position_player = new Vector2(256/2,244/2-2); // must be divisible by 8
+        pixels_per_step = texture_player.Width/2*3; //need scale factor here
+        sec_per_step = (float)0.0625;
+        pixels_per_sec = (int)(pixels_per_step / sec_per_step);
+
+        ps = PLAYER_STATE.IDLE;
     }
 
     void IScene.Update(GameTime gameTime)
-    {
-        if(!isRightPressed && Keyboard.GetState().IsKeyDown(Keys.Right) && velocity == Vector2.Zero)
-        {
-            //isRightPressed = true;
-            velocity.X = 1;
-        }
-        if(Keyboard.GetState().IsKeyUp(Keys.Right))
-        {
-            isRightPressed = false;
-        }
+    {       
 
-        if(!isLeftPressed && Keyboard.GetState().IsKeyDown(Keys.Left) && velocity == Vector2.Zero)
+        switch(ps)
         {
-            //isLeftPressed = true;
-            velocity.X = -1;
-        }
-        if(Keyboard.GetState().IsKeyUp(Keys.Left))
-        {
-            isLeftPressed = false;
-        }
+            case PLAYER_STATE.IDLE:
+                texture_player = texture_player_idle;
+                if(Keyboard.GetState().IsKeyDown(Keys.Up))
+                    ps = PLAYER_STATE.MOVING_UP;
+                
+                if(Keyboard.GetState().IsKeyDown(Keys.Down))
+                    ps = PLAYER_STATE.MOVING_DOWN;
+                
+                if(Keyboard.GetState().IsKeyDown(Keys.Left))
+                    ps = PLAYER_STATE.MOVING_LEFT;
+                
+                if(Keyboard.GetState().IsKeyDown(Keys.Right))
+                    ps = PLAYER_STATE.MOVING_RIGHT;
+                break;
 
-        if(!isUpPresesd && Keyboard.GetState().IsKeyDown(Keys.Up) && velocity == Vector2.Zero)
-        {
-            //isUpPresesd = true;
-            velocity.Y = -1;
-        }
-        if(Keyboard.GetState().IsKeyUp(Keys.Up))
-        {
-            isUpPresesd = false;
-        }
+            case PLAYER_STATE.MOVING_UP:
+                texture_player = texture_player_moving;
+                if(Keyboard.GetState().IsKeyUp(Keys.Up))
+                {
+                    if((int)(position_player.Y - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds) > (int)(position_player.Y / pixels_per_step)*pixels_per_step)
+                    {
+                        position_player.Y = (int)(position_player.Y - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds); 
+                    }
+                    else 
+                    {
+                        position_player.Y = (int)(position_player.Y / pixels_per_step)*pixels_per_step;
+                        ps = PLAYER_STATE.IDLE;
+                    }
+                }
+                else 
+                {
+                    position_player.Y = (int)(position_player.Y - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds);                  
+                }
+                break;
 
-        if(!isDownPresesd && Keyboard.GetState().IsKeyDown(Keys.Down) && velocity == Vector2.Zero)
-        {
-            //isDownPresesd = true;
-            velocity.Y = 1;
-        } 
-        if(Keyboard.GetState().IsKeyUp(Keys.Down))
-        {
-            isDownPresesd = false;
-        }
+            case PLAYER_STATE.MOVING_DOWN:
+                texture_player = texture_player_moving;
+                if(Keyboard.GetState().IsKeyUp(Keys.Down))
+                {
+                    if((int)(position_player.Y + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds) < (int)(position_player.Y / pixels_per_step + 1)*pixels_per_step)
+                    {
+                        position_player.Y = (int)(position_player.Y + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds); 
+                    }
+                    else 
+                    {
+                        position_player.Y = (int)(position_player.Y / pixels_per_step + 1)*pixels_per_step;
+                        ps = PLAYER_STATE.IDLE;
+                    }
+                }
+                else 
+                {
+                    position_player.Y = (int)(position_player.Y + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                break;
 
-        position_player += velocity * speed;
-        velocity = Vector2.Zero;
+            case PLAYER_STATE.MOVING_LEFT:
+                texture_player = texture_player_moving;
+                if(Keyboard.GetState().IsKeyUp(Keys.Left))
+                {
+                    if((int)(position_player.X - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds) > (int)(position_player.X / pixels_per_step)*pixels_per_step)
+                    {
+                        position_player.X = (int)(position_player.X - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds); 
+                    }
+                    else 
+                    {
+                        position_player.X = (int)(position_player.X / pixels_per_step)*pixels_per_step;
+                        ps = PLAYER_STATE.IDLE;
+                    }
+                }
+                else
+                {
+                    position_player.X = (int)(position_player.X - pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                break;
+
+            case PLAYER_STATE.MOVING_RIGHT:
+                texture_player = texture_player_moving;
+                if(Keyboard.GetState().IsKeyUp(Keys.Right))
+                {
+                    if((int)(position_player.X + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds) < (int)(position_player.X / pixels_per_step + 1)*pixels_per_step)
+                    {
+                        position_player.X = (int)(position_player.X + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds); 
+                    }
+                    else 
+                    {
+                        position_player.X = (int)(position_player.X / pixels_per_step + 1)*pixels_per_step;
+                        ps = PLAYER_STATE.IDLE;
+                    }
+                }
+                else
+                {
+                    position_player.X = (int)(position_player.X + pixels_per_sec*(float)gameTime.ElapsedGameTime.TotalSeconds);
+                }
+                break;
+        }
     }
 
     void IScene.Draw(GameTime gameTime, SpriteBatch spriteBatch, int scale_factor)

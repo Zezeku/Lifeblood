@@ -27,13 +27,12 @@ public class Game1 : Game
         IsMouseVisible = true;
 
         // UNCAPS FPS. UPDATES ARE NOT ADJUSTED TO ACCOUNT FOR THIS. TESTING SEVERE CASES ONLY
-        // _graphics.SynchronizeWithVerticalRetrace = false;
+        //_graphics.SynchronizeWithVerticalRetrace = false;
         // this.IsFixedTimeStep = false;
     }
 
     protected override void Initialize()
     {
-        GameTime gt = new GameTime();
         base.Initialize();
     }
 
@@ -45,7 +44,7 @@ public class Game1 : Game
 
         stack_scene = new Stack<IScene>();
         stack_scene.Push(new Zone_Start());
-        stack_scene.Push(new TitleScene());
+        //stack_scene.Push(new TitleScene());
         scene = stack_scene.Pop();
         scene.LoadContent(Content);
     }
