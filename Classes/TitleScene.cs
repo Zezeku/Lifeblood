@@ -67,7 +67,7 @@ public class TitleScene: IScene
         _font = content.Load<SpriteFont>("alagard");
 
         mask_alpha = 255;
-        fade_rectangle = new Rectangle(0, 0, 256, 244);
+        fade_rectangle = new Rectangle(0, 0, 256, 224);
         isFading = true;
 
         draw_list_textures = new List<Texture2D>();
@@ -75,7 +75,7 @@ public class TitleScene: IScene
         textures_colors = new List<Color>();
 
         draw_list_textures.Add(_texture_splash);
-        textures_rectangles.Add(new Rectangle(0, 0, 256, 244));
+        textures_rectangles.Add(new Rectangle(0, 0, 256, 224));
         textures_colors.Add(Color.White);
 
         draw_list_fonts = new List<SpriteFont>();
@@ -139,13 +139,13 @@ public class TitleScene: IScene
                     draw_list_fonts.Insert(0,_font);
                     fonts_strings.Insert(0,"New Game");
                     fonts_strings.Insert(0,"Continue");
-                    fonts_positions.Insert(0, new Vector2(256/3+10,244/2+20));
-                    fonts_positions.Insert(0, new Vector2(256/3+10,244/2+40));
+                    fonts_positions.Insert(0, new Vector2(256/3+10,224/2+20));
+                    fonts_positions.Insert(0, new Vector2(256/3+10,224/2+40));
                     fonts_colors.Insert(0, Color.White);
                     fonts_colors.Insert(0, Color.Gray);
 
                     draw_list_textures.Insert(0,_texture_title);
-                    textures_rectangles.Insert(0,new Rectangle(0, 0, 256, 244));
+                    textures_rectangles.Insert(0,new Rectangle(0, 0, 256, 224));
                     textures_colors.Insert(0,Color.White);
 
                     ts = TitleStates.FadeIn2;
@@ -162,7 +162,7 @@ public class TitleScene: IScene
                     isFading = false;
 
                     draw_list_textures.Insert(1,_texture_pointer);
-                    textures_rectangles.Insert(1, new Rectangle(256/4,244/2+17,20,20));
+                    textures_rectangles.Insert(1, new Rectangle(256/4,224/2+17,20,20));
                     textures_colors.Insert(1,Color.White);
 
                     ts = TitleStates.Title;

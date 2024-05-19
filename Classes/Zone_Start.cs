@@ -45,8 +45,8 @@ public class Zone_Start: IScene
         texture_player_moving = content.Load<Texture2D>("AvatarSpriteMove");
         texture_player = texture_player_idle;
 
-        position_player = new Vector2(256/2,244/2-2); // must be divisible by 8
-        pixels_per_step = texture_player.Width/2*3; //need scale factor here
+        position_player = new Vector2(8*3*10,8*3*10); // must be divisible by 8
+        pixels_per_step = (int)(texture_player.Width*(float)0.5*3); //need scale factor here
         sec_per_step = (float)0.0625;
         pixels_per_sec = (int)(pixels_per_step / sec_per_step);
 
