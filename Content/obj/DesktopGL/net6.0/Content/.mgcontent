@@ -7,13 +7,21 @@
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/alagard.spritefont</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSprite.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSpriteMove.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/AvatarSpriteSheet.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/mask.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/Overworld.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/SplashScreen.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/spritesheet_Walking.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitlePointer.png</File>
     <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/TitleScreen.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/worldMap_Collision.png</File>
+    <File>/mnt/NerdCave/MonoGame Projects/Lifeblood/Content/worldMap.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

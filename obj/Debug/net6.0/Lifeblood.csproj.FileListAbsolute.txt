@@ -31,3 +31,7 @@
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/alagard.xnb
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/TitlePointer.xnb
 /mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/mask.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/worldMap.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/worldMap_Collision.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/spritesheet_Walking.xnb
+/mnt/NerdCave/MonoGame Projects/Lifeblood/bin/Debug/net6.0/Content/AvatarSpriteSheet.xnb
